@@ -1,12 +1,26 @@
 <label>Server Name</label>
 <!--<input type="text" class="form-control" (input)="onUpdateServerName($event)">-->
+
+<!-- Allow the user to enter a serverName, using two-way-binding -->
 <input type="text" class="form-control" [(ngModel)] ="serverName">
-<!--<p>{{ serverName }}</p>-->
+
+<!-- This button is initially disabled, until 2 seconds after the page is loaded.
+	 Then, the user is allowed to enter a serverName and create a server.-->
 <button class="btn btn-primary" [disabled]="!allowNewServer"(click)="onCreateServer()">
 	Add Server
 </button>
-<!--<p>{{allowNewServer}}</p>-->
-<!--<p>{{ serverCreationStatus }}</p>-->
+
+<!-- ngIf returns true if a server was created-->
 <p *ngIf="serverCreated">Server was created, server name is {{ serverName }}</p>
-<app-server></app-server>
-<app-server></app-server>
+
+
+<!-- Demonstration of ngIf, else statement.
+	To execute properly, add "else noServer" to "*ngIf=serverCreated" above.
+<ng-template #noServer>
+	<p>
+		No server was created
+	</p>
+</ng-template> -->
+
+<!-- ngFor is similar to a for loop, it will output all contents of the array-->
+<app-server *ngFor="let server of servers"></app-server>
